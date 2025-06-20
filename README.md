@@ -89,4 +89,28 @@ Here are some of the essential team roles and their responsibilities within this
 * **Product Owner/Manager:** Defines the product vision, features, and prioritizes the backlog.
 * **UI/UX Designer:** Designs the user interface and user experience, focusing on usability and aesthetics.
 * **Project Manager:** Oversees the overall project planning, execution, and ensures it stays on track.
+## Technology Stack
+
+This project leverages a modern and robust technology stack to build a scalable and efficient AirBnB clone. Each technology plays a crucial role in achieving the project's architectural and functional goals.
+
+### 1. Backend Framework: Django
+* **Purpose:** Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design. In this project, Django will be used to build the robust backend, handling core business logic, user authentication, data management through its ORM (Object-Relational Mapper), and serving as the foundation for our RESTful APIs. Its "batteries included" philosophy accelerates development.
+
+### 2. Database System: MySQL
+* **Purpose:** MySQL is a powerful, open-source relational database management system. It will serve as the primary data store for the AirBnB clone, handling all persistent data such as user profiles, property listings, bookings, reviews, and other transactional information. Its reliability, scalability, and widespread adoption make it an ideal choice for this application's data layer.
+
+### 3. API Query Language: GraphQL (Optional/Advanced)
+* **Purpose:** GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. If implemented, GraphQL would provide a more efficient and flexible way for the frontend to fetch precisely the data it needs, reducing over-fetching and under-fetching issues common with traditional REST APIs. It would allow clients to request multiple resources in a single request.
+
+### 4. Containerization: Docker
+* **Purpose:** Docker will be used for containerization, ensuring consistency across different development environments and simplifying deployment. It allows packaging the application and its dependencies into isolated containers, making it easy to run the application reliably on any system that supports Docker, from local development machines to production servers.
+
+### 5. CI/CD Pipeline Automation: GitHub Actions
+* **Purpose:** GitHub Actions will be employed to automate the Continuous Integration (CI) and Continuous Delivery (CD) pipeline. This will include automating tasks such as running tests, building Docker images, and deploying the application to staging or production environments. GitHub Actions streamline the development workflow, enhance code quality, and enable faster, more reliable releases.
+
+### 6. Version Control: Git & GitHub
+* **Purpose:** Git is the distributed version control system used to track changes in the project's source code, while GitHub serves as the remote repository hosting service. This combination facilitates collaborative development, allows for easy tracking of changes, branching for new features, merging code, and reverting to previous states if necessary, ensuring a smooth and organized development workflow.
+
+### 7. Documentation Language: Markdown
+* **Purpose:** Markdown is a lightweight markup language used for creating formatted text using a plain-text editor. It is used extensively throughout this project for documenting project details, instructions, and code explanations within files like `README.md`, contributing to clear and easily readable project documentation.
 
