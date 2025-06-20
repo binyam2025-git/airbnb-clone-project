@@ -114,3 +114,74 @@ This project leverages a modern and robust technology stack to build a scalable 
 ### 7. Documentation Language: Markdown
 * **Purpose:** Markdown is a lightweight markup language used for creating formatted text using a plain-text editor. It is used extensively throughout this project for documenting project details, instructions, and code explanations within files like `README.md`, contributing to clear and easily readable project documentation.
 
+## Database Design
+
+The AirBnB clone project requires a well-structured relational database to manage various types of data. Below are the key entities identified for the core functionality, along with their important fields and the relationships between them.
+
+### Key Entities and Fields:
+
+#### 1. Users
+* **Purpose:** Stores information about all registered users of the platform (guests and hosts).
+* **Important Fields:**
+    * `user_id` (Primary Key, unique identifier for the user)
+    * `username` (Unique, string)
+    * `email` (Unique, string, for login and communication)
+    * `password_hash` (Securely stored password)
+    * `profile_picture_url` (Optional, URL to user's profile image)
+    * `is_host` (Boolean, indicates if the user can list properties)
+
+#### 2. Properties
+* **Purpose:** Stores details about properties available for booking.
+* **Important Fields:**
+    * `property_id` (Primary Key, unique identifier for the property)
+    * `host_id` (Foreign Key, links to the `user_id` of the host)
+    * `title` (String, name of the property)
+    * `description` (Text, detailed description of the property)
+    * `address` (String, location of the property)
+    * `price_per_night` (Decimal, cost to book per night)
+    * `number_of_guests` (Integer, max guests property can accommodate)
+    * `amenities` (Text/JSON, list of available amenities)
+    * `image_urls` (Text/JSON, URLs to property images)
+
+#### 3. Bookings
+* **Purpose:** Records instances of a user booking a specific property for a period.
+* **Important Fields:**
+    * `booking_id` (Primary Key, unique identifier for the booking)
+    * `property_id` (Foreign Key, links to the booked `property_id`)
+    * `guest_id` (Foreign Key, links to the `user_id` of the guest who booked)
+    * `check_in_date` (Date)
+    * `check_out_date` (Date)
+    * `total_price` (Decimal, calculated cost of the booking)
+    * `status` (String, e.g., 'pending', 'confirmed', 'cancelled', 'completed')
+
+#### 4. Reviews
+* **Purpose:** Stores feedback provided by guests about properties they have stayed in.
+* **Important Fields:**
+    * `review_id` (Primary Key, unique identifier for the review)
+    * `booking_id` (Foreign Key, links to the specific `booking_id` this review is for)
+    * `guest_id` (Foreign Key, links to the `user_id` who wrote the review)
+    * `property_id` (Foreign Key, links to the `property_id` being reviewed)
+    * `rating` (Integer, e.g., 1-5 stars)
+    * `comment` (Text, detailed feedback)
+    * `review_date` (Datetime, when the review was submitted)
+
+#### 5. Payments
+* **Purpose:** Records transaction details for bookings.
+* **Important Fields:**
+    * `payment_id` (Primary Key, unique identifier for the payment)
+    * `booking_id` (Foreign Key, links to the associated `booking_id`)
+    * `amount` (Decimal, the amount paid)
+    * `payment_date` (Datetime, when the payment was processed)
+    * `payment_method` (String, e.g., 'credit card', 'paypal')
+    * `transaction_status` (String, e.g., 'success', 'failed', 'refunded')
+
+### Entity Relationships:
+
+* **Users and Properties:** A **User** (who is a host) can have **multiple Properties**. Each **Property** belongs to exactly one **User** (its host). (One-to-Many: `Users` to `Properties` via `host_id`).
+* **Users and Bookings:** A **User** (as a guest) can make **multiple Bookings**. Each **Booking** is made by exactly one **User** (the guest). (One-to-Many: `Users` to `Bookings` via `guest_id`).
+* **Properties and Bookings:** A **Property** can have **multiple Bookings**. Each **Booking** is for exactly one **Property**. (One-to-Many: `Properties` to `Bookings` via `property_id`).
+* **Bookings and Reviews:** A **Booking** can result in **one Review** (once the stay is complete). A **Review** is always associated with a single **Booking**. (One-to-One: `Bookings` to `Reviews` via `booking_id`).
+* **Users and Reviews:** A **User** (as a guest) can write **multiple Reviews**. Each **Review** is written by one **User**. (One-to-Many: `Users` to `Reviews` via `guest_id`).
+* **Properties and Reviews:** A **Property** can receive **multiple Reviews**. Each **Review** is for one **Property**. (One-to-Many: `Properties` to `Reviews` via `property_id`).
+* **Bookings and Payments:** A **Booking** can have **one or more Payments** (e.g., partial payments, refunds). A **Payment** is associated with one **Booking**. (One-to-Many: `Bookings` to `Payments` via `booking_id`).
+
